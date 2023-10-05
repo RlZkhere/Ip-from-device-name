@@ -1,4 +1,6 @@
 #!/bin/bash
+echo -e 'Insert the modem IP address'
+read mip
 echo -e 'Type the device name \n'
 read device
 sudo nmap -sn 192.168.1.1-200 | grep $device | grep -Eo '[0-9]{1,4}' >> ip2.txt && cat ip2.txt | tail -4 >>ip.txt && mv -f ip.txt ip2.txt && cat ip2.txt | head -2 | tr -d '\n' | sed -r 's/.{3}/&./g' >>ip.txt && cat ip2.txt | sed -n '3,3p' | tr -d '\n' | sed -r 's/.{1}/&./g' >> ip.txt && cat ip2.txt | tail -1 | tr -d '\n' >> ip.txt && cat ip.txt && echo -e '\n' && rm -r ip.txt && rm -r ip2.txt
